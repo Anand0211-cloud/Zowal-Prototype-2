@@ -533,20 +533,25 @@ img {
     .nav {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 100%;
-        /* Full screen menu */
+        left: 0;
+        /* Cover full screen */
+        width: 100vw;
         height: 100vh;
         background-color: var(--color-white);
         flex-direction: column;
         justify-content: center;
-        transition: var(--transition-normal);
+        transition: transform 0.3s ease-in-out;
+        /* Better animation */
         z-index: 1000;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transform: translateX(100%);
+        /* Move off-screen right */
+        /* Prevent scroll chaining */
+        overscroll-behavior: contain;
     }
 
     .nav.active {
-        right: 0;
+        transform: translateX(0);
+        /* Slide in */
     }
 
     .nav__list {
@@ -557,6 +562,9 @@ img {
 
     .nav__link {
         font-size: 1.5rem;
+        display: block;
+        /* Larger hit area */
+        padding: 10px;
     }
 
     /* Footer Adjustments */
@@ -570,6 +578,21 @@ img {
     select,
     textarea {
         font-size: 16px !important;
+    }
+
+    /* Fix long word overflow (e.g. Handgefertigte) */
+    h2,
+    h3,
+    .card__title {
+        overflow-wrap: break-word;
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        max-width: 100%;
+    }
+
+    .feature-content h2 {
+        font-size: 2rem;
+        /* reduced from 2.5rem */
     }
 }
 
