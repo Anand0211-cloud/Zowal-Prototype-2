@@ -14,7 +14,7 @@ const Home = () => {
                     </p>
                     <div className="hero__actions">
                         <Link to="/kontakt" className="btn">Angebot anfordern</Link>
-                        <Link to="/ueberuns" className="btn btn--outline" style={{ marginLeft: '16px' }}>Über uns</Link>
+                        <Link to="/ueberuns" className="btn btn--outline">Über uns</Link>
                     </div>
                 </div>
                 <div className="hero__divider"></div>

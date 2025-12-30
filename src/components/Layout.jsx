@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 
 const Layout = () => {
     const location = useLocation();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const isActive = (path) => location.pathname === path ? 'active' : '';
+
+    // Close menu when a link is clicked
+    const closeMenu = () => setIsMenuOpen(false);
+
+    // Toggle menu
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     return (
         <>
             <header className="header">
                 <div className="container header__container">
-                    <Link to="/" className="logo">
+                    <Link to="/" className="logo" onClick={closeMenu}>
                         <span className="logo__icon">Z</span>
                         <div className="logo__text">
                             <span className="logo__title">ZOWAL</span>
                             <span className="logo__subtitle">BAUSANIERUNG</span>
                         </div>
                     </Link>
-                    <nav className="nav">
+
+                    {/* Hamburger Toggle */}
+                    <button className={`nav__toggle ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu} aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <nav className={`nav ${isMenuOpen ? 'active' : ''}`}>
                         <ul className="nav__list">
-                            <li><Link to="/" className={`nav__link ${isActive('/')}`}>Home</Link></li>
-                            <li><Link to="/ueberuns" className={`nav__link ${isActive('/ueberuns')}`}>Über uns</Link></li>
-                            <li><Link to="/produkte" className={`nav__link ${isActive('/produkte')}`}>Produkte</Link></li>
-                            <li><Link to="/kontakt" className="nav__link btn-nav">Kontakt</Link></li>
+                            <li><Link to="/" className={`nav__link ${isActive('/')}`} onClick={closeMenu}>Startseite</Link></li>
+                            <li><Link to="/ueberuns" className={`nav__link ${isActive('/ueberuns')}`} onClick={closeMenu}>Über uns</Link></li>
+                            <li><Link to="/produkte" className={`nav__link ${isActive('/produkte')}`} onClick={closeMenu}>Produkte</Link></li>
+                            <li><Link to="/kontakt" className="nav__link btn-nav" onClick={closeMenu}>Kontakt</Link></li>
                         </ul>
                     </nav>
                 </div>
